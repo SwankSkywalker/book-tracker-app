@@ -19,6 +19,8 @@ body {
     width: 100vw;
 }
 
+/*header*/
+
 .header .container{
     display: flex;
     align-items: center;
@@ -32,6 +34,8 @@ body {
     padding: 12px 24px;
     border: none;
     border-radius: 5px;
+    font-weight: bold;
+    font-size: larger;
 }
 
 .btn:hover{
@@ -45,6 +49,8 @@ body {
     justify-content: flex-end;
 }
 
+/*main content area*/
+
 .main-container {
     display: flex;
     padding: var(--main-padding);
@@ -54,8 +60,6 @@ body {
 .add-book {
     padding: 14px 35px;
     background-color: #ffff;
-    font-weight: bold;
-    font-size: larger;
 }
 
 
@@ -78,22 +82,50 @@ body {
     width: 300px;
 }
 
+/*pop-up modal area*/
+
 .modal {
     position: fixed;
+    display: flex;
     z-index: 1;
     top: 50%;
     left: 50%;
     width: 300px;
+    height: auto;
     padding: var(--spacing-lg);
-    border-radius: var();
+    border-radius: 5px;
     text-align: center;
     transform: translate(-50%, -50%) scale(0);
     transition: 200ms ease-in-out;
+    background-color: var(--main-color);
+    justify-content: center;
+    box-shadow: var(--shadow);
 }
 
-.modal.active{
+.show {
     transform: translate(-50%, -50%) scale(1);
 }
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 85%;
+    gap: 10px;
+}
+
+input {
+    padding: 10px;
+}
+
+label {
+    font-weight: bold;
+}
+
+.submit-btn:hover{
+    background-color: chartreuse;
+}
+
+/*footer*/
 
 .footer {
     position: absolute;

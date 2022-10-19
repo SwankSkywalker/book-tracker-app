@@ -1,20 +1,26 @@
-const addBook = document.querySelector('.add-book');
-const grid = document.querySelector('.books-grid');
-const form = document.querySelector('.add-book-form');
-const modal = document.querySelector('.modal');
-let myLibrary = [];
 
 
 
 //psuedo code 
 
-//ACCESSING THE MODAL
-//when the add book button is pressed
-//make the modal with the form appear on the document
+function library() {
+    let modal = document.querySelector('.modal');
+    let newBook = document.querySelector('.add-book');
+    
+    //ACCESSING THE MODAL
+     newBook.addEventListener('click', function() {
+         modal.classList.add('show');
+     });
+     
+     //CREATING THE CARD
+     
+ }
+ 
+ library();
 
 
-
-//CREATING THE CARD
 //when the add new book button is pressed
 //verify all fields are filled 
 //then add the new card with all the information to the book grid
+
+

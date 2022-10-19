@@ -20,7 +20,7 @@
         </div>
      </header>
      <main class="main-container">
-        <button class="btn add-book">+ Add book</button>
+        <button class="btn add-book" id="newBook">+ Add book</button>
         <div class="books-grid"></div>
      </main>
      <footer class="footer">
@@ -36,14 +36,13 @@
         <form class="add-book-form" id="addBookForm">
             <h3>Add new book</h3>
             <input type="text" class="input" id="title" placeholder="Title" required maxlength="100">
-            <p class="errorMsg" id="error-msg"></p>
             <input type="text" class="input" id="author" placeholder="Author" required maxlength="100">
             <input type="number" class="input" id="pages" placeholder="Pages" required min="1" max="10000">
             <div class="is-read">
                 <label for="is-read">Have your read it?</label>
-                <input type="text" class="checkbox" id="is-read">
+                <input type="checkbox" class="checkbox" id="is-read">
             </div>
-            <button class="submitBtn">Add Book</button>
+            <button class="btn submit-btn">Add Book</button>
         </form>
      </div>
 </body>

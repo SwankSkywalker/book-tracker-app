@@ -12,6 +12,8 @@
     --shadow: rgba(0, 0, 0, 0.26) 0px 1px 4px;
     --spacing-lg: 20px;
     --spacing-xl: 35px;
+    --button-green: rgba(86, 240, 88, 0.5);
+    --button-red: rgba(248, 7, 59, 0.5);
 }
 
 body {
@@ -95,6 +97,14 @@ body {
     justify-content: space-around;
 }
 
+.book-read {
+    background-color: var(--button-green);
+}
+
+.not-read {
+    background-color: var(--button-red);
+}
+
 /*pop-up modal area*/
 
 .modal {
@@ -135,7 +145,7 @@ label {
 }
 
 .submit-btn:hover{
-    background-color: chartreuse;
+    background-color: var(--button-green);
 }
 
 .overlay {

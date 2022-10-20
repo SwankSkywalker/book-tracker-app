@@ -38,6 +38,14 @@ body {
     font-size: larger;
 }
 
+.card-button {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: medium;
+}
+
 .btn:hover{
     cursor: pointer;
     background-color: #c7d1d6;
@@ -80,6 +88,11 @@ body {
     box-shadow: var(--shadow);
     height: 300px;
     width: 300px;
+}
+
+.card-btns {
+    display: inline-flex;
+    justify-content: space-around;
 }
 
 /*pop-up modal area*/
@@ -138,6 +151,8 @@ label {
 .active {
     display: block;
 }
+
+
 
 /*footer*/
 

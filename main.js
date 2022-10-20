@@ -20,7 +20,7 @@ class Shelf {
     }
 
     addBook(newBook) {
-        if (!this.isInLibrary(newBook)) {
+        if (!this.isOnShelf(newBook)) {
             this.books.push(newBook)
         }
     }
@@ -33,7 +33,7 @@ class Shelf {
         return this.books.find((book) => book.title === title)
     }
 
-    isInLibrary(newBook) {
+    isOnShelf(newBook) {
         return this.books.some((book) => book.title === newBook.title)
     }
 }
@@ -62,7 +62,7 @@ const closeNewBookModal = () => {
 }
 
 const addBookToShelf = (book) => {
-
+    //Creates book card elements
     const bookCard = document.createElement('div')
     const title = document.createElement('p')
     const author = document.createElement('p')
@@ -70,22 +70,64 @@ const addBookToShelf = (book) => {
     const cardBtns = document.createElement('div')
     const readBtn = document.createElement('button')
     const removeBtn = document.createElement('button')
-
+    //Assigns classes to new elements
     bookCard.classList.add('book-card');
     cardBtns.classList.add('card-btns');
     readBtn.classList.add('card-button');
     removeBtn.classList.add('card-button');
     readBtn.onclick = toggleRead;
     removeBtn.onclick = removeBook;
-
+    //Adds content for card elements
     title.textContent = `Title: ${book.title}`;
     author.textContent = book.author;
     pages.textContent = `${book.pages} pages`;
     removeBtn.textContent = 'Remove book';
+  
 
-    
-
+    bookCard.appendChild(title)
+    bookCard.appendChild(author)
+    bookCard.appendChild(pages)
+    cardBtns.appendChild(readBtn)
+    cardBtns.appendChild(removeBtn)
+    bookCard.appendChild(cardBtns)
+    bookShelf.appendChild(bookCard)
 }
 
+const getBookInfo = () => {
+    const title = document.getElementById('title').value
+    const author = document.getElementById('author').value
+    const pages = document.getElementById('pages').value
+    const isRead = document.getElementById('is-read').checked
+    return new Book(title, author, pages, isRead)
+}
+
+const addBook = (e) => {
+    e.preventDefault()
+    const newBook = getBookInfo()
+
+    if (shelf.isOnShelf(newBook)) {
+        return 
+    } else { 
+        shelf.addBook(newBook) 
+        addBookToShelf()
+    }
+    closeNewBookModal()
+}
+
+const toggleRead = () => {
+     //Toggles books read status
+     if (book.isRead) {
+        readBtn.textContent = 'Read'
+        readBtn.classList.add('book-read')
+    } else {
+        readBtn.textContent = 'Not read'
+        readBtn.classList.add('not-read')
+    }
+}
+
+const removeBook = () => {
+    
+}
+bookForm.addEventListener('submit', addBook);
 addBookBtn.addEventListener('click', openNewBookModal);
 overlay.addEventListener('click', closeNewBookModal);

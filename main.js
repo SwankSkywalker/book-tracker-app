@@ -38,7 +38,8 @@ class Shelf {
     }
 }
 
-const shelf = new Shelf()
+const book = new Book();
+const shelf = new Shelf();
 
 const loginBtn = document.getElementById('logInBtn');
 const addBookBtn = document.getElementById('newBook');
@@ -61,7 +62,18 @@ const closeNewBookModal = () => {
     overlay.classList.remove('active');
 }
 
-const addBookToShelf = (book) => {
+const addBookToShelf = () => {
+    // clearBookShelf()
+    for (let book of shelf.books) {
+        addBookCard(book);
+    }
+}
+
+/*const clearBookShelf = () => {
+    bookShelf.removeChild;
+}*/
+
+const addBookCard = (book) => {
     //Creates book card elements
     const bookCard = document.createElement('div')
     const title = document.createElement('p')
@@ -98,7 +110,7 @@ const getBookInfo = () => {
     const author = document.getElementById('author').value
     const pages = document.getElementById('pages').value
     const isRead = document.getElementById('is-read').checked
-    return new Book(title, author, pages, isRead)
+    return new Book(title, author, pages, isRead);
 }
 
 const addBook = (e) => {
@@ -106,7 +118,8 @@ const addBook = (e) => {
     const newBook = getBookInfo()
 
     if (shelf.isOnShelf(newBook)) {
-        return 
+        alert('book already exists')
+        return;
     } else { 
         shelf.addBook(newBook) 
         addBookToShelf()

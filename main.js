@@ -63,15 +63,15 @@ const closeNewBookModal = () => {
 }
 
 const addBookToShelf = () => {
-    // clearBookShelf()
+    clearBookShelf()
     for (let book of shelf.books) {
         addBookCard(book);
     }
 }
 
-/*const clearBookShelf = () => {
-    bookShelf.removeChild;
-}*/
+const clearBookShelf = () => {
+    bookShelf.innerHTML = '';
+}
 
 const addBookCard = (book) => {
     //Creates book card elements
@@ -85,8 +85,8 @@ const addBookCard = (book) => {
     //Assigns classes to new elements
     bookCard.classList.add('book-card');
     cardBtns.classList.add('card-btns');
-    readBtn.classList.add('card-button');
-    removeBtn.classList.add('card-button');
+    readBtn.classList.add('card-button-read');
+    removeBtn.classList.add('card-button-remove');
     readBtn.onclick = toggleRead;
     removeBtn.onclick = removeBook;
     //Adds content for card elements
@@ -139,8 +139,11 @@ const toggleRead = () => {
 }
 
 const removeBook = () => {
-    
+    let cur = $('.bookCard')
+    cur.parent().remove();
 }
+
+removeBtn.addEventListener('click', removeBook);
 bookForm.addEventListener('submit', addBook);
 addBookBtn.addEventListener('click', openNewBookModal);
 overlay.addEventListener('click', closeNewBookModal);

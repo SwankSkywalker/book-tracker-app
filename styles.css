@@ -40,14 +40,6 @@ body {
     font-size: larger;
 }
 
-.card-button {
-    padding: 12px 24px;
-    border: none;
-    border-radius: 5px;
-    font-weight: bold;
-    font-size: medium;
-}
-
 .btn:hover{
     cursor: pointer;
     background-color: #c7d1d6;
@@ -63,38 +55,60 @@ body {
 
 .main-container {
     display: flex;
+    flex-direction: column;
     padding: var(--main-padding);
     justify-content: center;
 }
 
 .add-book {
-    padding: 14px 35px;
+    justify-content: center;
+    align-items: center;
+    /* padding: 14px 35px; */
     background-color: #ffff;
 }
 
 
-.book-grid{
+.books-grid{
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px,1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: var(--spacing-xl);
-    margin: var(--spacing-xl);
+    margin-top: var(--spacing-xl);
 }
 
 .book-card {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: center;
     font-size: 1.2rem;
     border-radius: 5px;
     background-color: var(--main-color);
     box-shadow: var(--shadow);
-    height: 300px;
+    height: 250px;
     width: 300px;
+    padding: var(--main-padding);
 }
 
 .card-btns {
     display: inline-flex;
     justify-content: space-around;
+    align-items: center;
+    gap: 10px;
+
+}
+
+.card-button-read, .card-button-remove {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: small;
+}
+
+.card-button-read:hover, .card-button-remove:hover {
+    cursor: pointer;
+    background-color: #c7d1d6;
+    transition: ease-in 150ms;
 }
 
 .book-read {

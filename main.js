@@ -1,149 +1,85 @@
-//Construct Classes
 
-class Book {
-    constructor(
-        title = 'Unknown',
-        author = 'Unknown',
-        pages = 0,
-        isRead = false
-    ) {
-        this.title = title
-        this.author = author
-        this.pages = pages
-        this.isRead = isRead
-    }
-}
 
-class Shelf {
-    constructor() {
-        this.books = []
-    }
+let myLibrary = [
+    {
+        title: 'Harry Potter',
+        author: 'J.K. Rowling',
+        pages: 357,
+        isRead: false 
+    },
+        
+    {
+        title: 'Amelia Bedelia',
+        author: 'Nesreen Elsaadi',
+        pages: 114,
+        isRead: false
+    },
 
-    addBook(newBook) {
-        if (!this.isOnShelf(newBook)) {
-            this.books.push(newBook)
-        }
+    {
+        title: 'The Book of Time',
+        author: 'Guillame Prevost',
+        pages: 347,
+        isRead: true
     }
+];
 
-    removeBook(title) {
-        this.books = this.books.filter((book) => book.title !== title)
-    }
+const bookForm = document.getElementById('addBookForm');
+const newBookBtn = document.getElementById('newBook');
+const modal = document.getElementById('book-modal');
+const bookShelf = document.getElementById('booksGrid');
+const overlay = document.getElementById('overlay');
 
-    getBook(title) {
-        return this.books.find((book) => book.title === title)
-    }
-
-    isOnShelf(newBook) {
-        return this.books.some((book) => book.title === newBook.title)
-    }
+function Book(title, author, pages, isRead) {
+    this.title = title
+    this.author = author
+    this.pages = pages
+    this.isRead = isRead
 }
 
 const book = new Book();
-const shelf = new Shelf();
 
-const loginBtn = document.getElementById('logInBtn');
-const addBookBtn = document.getElementById('newBook');
-const bookShelf = document.querySelector('.books-grid');
-const bookModal = document.getElementById('book-modal');
-const bookForm = document.getElementById('addBookForm');
-const overlay = document.getElementById('overlay');
-
-
-//Making Book modal show
-
-const openNewBookModal = () => {
-    bookForm.reset()
-    bookModal.classList.add('show'); 
-    overlay.classList.add('active');
-}
-
-const closeNewBookModal = () => {
-    bookModal.classList.remove('show');
-    overlay.classList.remove('active');
-}
-
-const addBookToShelf = () => {
-    clearBookShelf()
-    for (let book of shelf.books) {
-        addBookCard(book);
-    }
-}
-
-const clearBookShelf = () => {
-    bookShelf.innerHTML = '';
-}
-
-const addBookCard = (book) => {
-    //Creates book card elements
+function addToLibrary() {
     const bookCard = document.createElement('div')
     const title = document.createElement('p')
     const author = document.createElement('p')
     const pages = document.createElement('p')
-    const cardBtns = document.createElement('div')
+    const btnDiv = document.createElement('div')
     const readBtn = document.createElement('button')
-    const removeBtn = document.createElement('button')
-    //Assigns classes to new elements
-    bookCard.classList.add('book-card');
-    cardBtns.classList.add('card-btns');
-    readBtn.classList.add('card-button-read');
-    removeBtn.classList.add('card-button-remove');
-    readBtn.onclick = toggleRead;
-    removeBtn.onclick = removeBook;
-    //Adds content for card elements
+    const rmBtn = document.createElement('button')
+    
+    bookCard.classList.add('book-card')
+    btnDiv.classList.add('card-btns')
+    readBtn.classList.add('card-button-read')
+    rmBtn.classList.add('card-button-remove')
+    
     title.textContent = `Title: ${book.title}`;
     author.textContent = book.author;
     pages.textContent = `${book.pages} pages`;
-    removeBtn.textContent = 'Remove book';
-  
-
+    rmBtn.textContent = `Remove book`;
+    
     bookCard.appendChild(title)
     bookCard.appendChild(author)
     bookCard.appendChild(pages)
-    cardBtns.appendChild(readBtn)
-    cardBtns.appendChild(removeBtn)
-    bookCard.appendChild(cardBtns)
-    bookShelf.appendChild(bookCard)
+    btnDiv.appendChild(readBtn)
+    btnDiv.appendChild(rmBtn)
+    bookCard.appendChild(btnDiv)
+    bookShelf.appendChild(bookCard)  
+     
+    myLibrary .forEach(book => {
+        console.log(book);
+    });
+    
+}
+const openBookModal = () => {
+    bookForm.reset()
+    modal.classList.add('show')
+    overlay.classList.add('active')
 }
 
-const getBookInfo = () => {
-    const title = document.getElementById('title').value
-    const author = document.getElementById('author').value
-    const pages = document.getElementById('pages').value
-    const isRead = document.getElementById('is-read').checked
-    return new Book(title, author, pages, isRead);
+const closeBookModal = () => {
+    modal.classList.remove('show')
+    overlay.classList.remove('active');
 }
 
-const addBook = (e) => {
-    e.preventDefault()
-    const newBook = getBookInfo()
-
-    if (shelf.isOnShelf(newBook)) {
-        alert('book already exists')
-        return;
-    } else { 
-        shelf.addBook(newBook) 
-        addBookToShelf()
-    }
-    closeNewBookModal()
-}
-
-const toggleRead = () => {
-     //Toggles books read status
-     if (book.isRead) {
-        readBtn.textContent = 'Read'
-        readBtn.classList.add('book-read')
-    } else {
-        readBtn.textContent = 'Not read'
-        readBtn.classList.add('not-read')
-    }
-}
-
-const removeBook = () => {
-    let cur = $('.bookCard')
-    cur.parent().remove();
-}
-
-removeBtn.addEventListener('click', removeBook);
-bookForm.addEventListener('submit', addBook);
-addBookBtn.addEventListener('click', openNewBookModal);
-overlay.addEventListener('click', closeNewBookModal);
+newBookBtn.addEventListener('click', openBookModal);
+overlay.addEventListener('click', closeBookModal);

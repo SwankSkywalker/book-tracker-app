@@ -49,7 +49,6 @@ function indexUpdate() {
 }
 
 function addNewBookToLibrary(title, author, pages, isRead) {
-    addBookToLibrary(new Book(title, author, pages, isRead));
     updateLib();
 }
 
@@ -138,8 +137,9 @@ const addBook = (e) => {
     if (myLibrary.includes(newBook)) {
         return;
     } else {
+        console.log(newBook);
         myLibrary.push(newBook);
-        addNewBookToLibrary()
+        addNewBookToLibrary(newBook);
     }
     closeBookModal()
 }

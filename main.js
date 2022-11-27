@@ -48,7 +48,7 @@ function indexUpdate() {
     }
 }
 
-function addNewBookToLibrary(title, author, pages, isRead) {
+function addNewBookToLibrary(_title, _author, _pages, _isRead) {
     updateLib();
 }
 
@@ -95,7 +95,7 @@ const closeBookModal = () => {
 
 const addBookCard = (book) =>  {
     
-    //initialize bookcard elements
+    //initialize book card elements
     const bookCard = document.createElement('div')
     const title = document.createElement('p')
     const author = document.createElement('p')
@@ -121,6 +121,19 @@ const addBookCard = (book) =>  {
     btnDiv.appendChild(rmBtn)
     bookCard.appendChild(btnDiv)
     bookShelf.appendChild(bookCard)  
+
+    const toggleRead = () => {
+        const checkBox = document.querySelector('.checkbox'); 
+        
+        if (checkBox.checked) {
+            readBtn.classList.add('book-read');
+            readBtn.textContent = 'Read';
+        } else {
+            readBtn.classList.add('not-read');
+            readBtn.textContent = 'Not Read';
+        }
+    }
+    toggleRead();
 }
 
 const getBookInfo = () => {
@@ -143,16 +156,8 @@ const addBook = (e) => {
     }
     closeBookModal()
 }
-function toggleRead() {
-    const readButton = document.getElementById('is-read').checked;
 
-    if (book.isRead == !readButton) {
-        return readButton.textContent = 'Not read';
-    } else {
-        return readButton.textContent = 'Read';
-    }
-}
- 
-bookForm.addEventListener('submit', addBook)
+
+bookForm.addEventListener('submit', addBook);
 newBookBtn.addEventListener('click', openBookModal);
 overlay.addEventListener('click', closeBookModal);

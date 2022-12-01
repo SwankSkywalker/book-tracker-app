@@ -52,8 +52,8 @@ function addNewBookToLibrary(_title, _author, _pages, _isRead) {
     updateLib();
 }
 
-function removeBook(index) {
-    myLibrary = myLibrary.filter(book => book.getIndex() != index);
+function removeBook(myLibraryBook) {
+    myLibraryBook = myLibrary.filter(book => book.getIndex() !== index);
     updateIndex();
     updateLibrary();
 }
@@ -127,7 +127,7 @@ const addBookCard = (book) =>  {
         
         if (checkBox.checked) {
             readBtn.classList.add('book-read');
-            readBtn.textContent = 'Read';
+            readBtn.textContent = 'Book Read';
         } else {
             readBtn.classList.add('not-read');
             readBtn.textContent = 'Not Read';

@@ -14,6 +14,7 @@
     --spacing-xl: 35px;
     --button-green: rgba(86, 240, 88, 0.5);
     --button-red: rgba(248, 7, 59, 0.5);
+    --clr-red: hsl(5, 90%, 64%);
 }
 
 body {
@@ -99,7 +100,11 @@ body {
 
 }
 
-.card-button-read, .card-button-remove {
+button.outline {
+    color:  var(--clr-red);
+}
+
+#removeBtn, .readBtn {
     padding: 12px 24px;
     border: none;
     border-radius: 5px;
@@ -107,7 +112,7 @@ body {
     font-size: small;
 }
 
-.card-button-read:hover, .card-button-remove:hover {
+#removeBtn:hover, .readBtn:hover {
     cursor: pointer;
     background-color: #c7d1d6;
     transition: ease-in 150ms;

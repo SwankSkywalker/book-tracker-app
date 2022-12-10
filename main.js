@@ -162,16 +162,12 @@
 // newBookBtn.addEventListener('click', openBookModal);
 // overlay.addEventListener('click', closeBookModal);
 
-const bookTitle = document.querySelector('#title');
-const bookAuthor = document.querySelector('#author');
-const bookPages = document.querySelector('#pages');
-const isBookRead = document.querySelector('#is-read');
-const submitBtn = document.querySelector('#submitBtn');
-const bookShelf = document.querySelector('#booksGrid');
-const bookForm = document.querySelector('#addBookForm');
-const overlay = document.querySelector('#overlay');
-const modal = document.querySelector('#book-modal');
-const newBookBtn = document.querySelector('#newBook');
+const submitBtn = document.getElementById('submitBtn');
+const bookShelf = document.getElementById('booksGrid');
+const bookForm = document.getElementById('addBookForm');
+const overlay = document.getElementById('overlay');
+const modal = document.getElementById('book-modal');
+const newBookBtn = document.getElementById('newBook');
 
 let library = [];
 
@@ -183,7 +179,7 @@ function Book(title, author, pages, read) {
     this.index = 0;
 }
 
-const book = new Book(title, author, pages,);
+const book = new Book();
 
 const addBook = (e) => {
     e.preventDefault();
@@ -201,12 +197,12 @@ const addBook = (e) => {
 }
 
 const getBookInfo = () => {
-    title = bookTitle.value;
-    author = bookAuthor.value;
-    pages = bookPages.value;
-    read = isBookRead.checked;
-    id = this.id;
-    return book;
+    title = document.getElementById('title').value;
+    author = document.getElementById('author').value;
+    pages = document.getElementById('pages').value;
+    read = document.getElementById('is-read').value;
+    index = this.id;
+    return new Book(title, author, pages, read);
 }
 
 const updateShelf = () => {
@@ -284,10 +280,10 @@ submitBtn.addEventListener('click', addBook);
 
 //form value reset
 const formReset = () => {
-    bookTitle.value = '';
-    bookAuthor.value = '';
-    bookPages.value = '';
-    isBookRead.value = '';
+    title.value = '';
+    author.value = '';
+    pages.value = '';
+    read.value = '';
 };
 
 //Library in local storage

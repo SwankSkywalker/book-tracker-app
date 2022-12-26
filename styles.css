@@ -104,8 +104,9 @@ h3 {
 
 }
 
-button.outline {
-    color:  var(--clr-red);
+#removeBtn.outline {
+    border: 3px solid;
+    border-color:  var(--clr-red);
 }
 
 #removeBtn, .readBtn {

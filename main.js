@@ -30,9 +30,9 @@ const addBook = (e) => {
     } else {
         console.log(library);
         library.push(newBook);
-        formReset();
         // setLocal();
         updateShelf();
+        bookForm.reset();
     }
     closeBookModal();
 }

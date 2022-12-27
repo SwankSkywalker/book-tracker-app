@@ -256,18 +256,8 @@ const createBook = (book) => {
         readBtn.classList.add('not-read')
     } else {
         readBtn.textContent = 'Book Read';
-        
+        readBtn.classList.add('book-read');
     }
-    
-    isRead.addEventListener('change', () => {
-        if (this.checked) {
-            readBtn.classList.add('book-read');
-            readBtn.textContent = 'Book Read';
-        } else {
-            readBtn.classList.add('not-read');
-            readBtn.textContent = 'Not Read';
-        }
-    });   
 
     rmBtn.addEventListener('click', () => {
         library.splice(library.indexOf(book), 1);
@@ -277,7 +267,7 @@ const createBook = (book) => {
     });
 
     readBtn.addEventListener('click', () => {
-        isRead = !isRead;
+        book.read = !book.read;
         // setLocal();
         updateShelf();
     });

@@ -25,7 +25,8 @@ const book = new Book();
 const addBook = (e) => {
     e.preventDefault();
     const newBook = getBookInfo();
-    if (library.includes(newBook.title)) {
+    if (library.includes(Book.title)) {
+        console.log(Book);
         return;
     } else {
         console.log(library);

@@ -1,146 +1,129 @@
-//Construct Classes
+const submitBtn = document.getElementById('submitBtn');
+const bookShelf = document.getElementById('booksGrid');
+const bookForm = document.getElementById('addBookForm');
+const overlay = document.getElementById('overlay');
+const modal = document.getElementById('book-modal');
+const newBookBtn = document.getElementById('newBook');
+
+let library = [];
 
 class Book {
-    constructor(
-        title = 'Unknown',
-        author = 'Unknown',
-        pages = 0,
-        isRead = false
-    ) {
-        this.title = title
-        this.author = author
-        this.pages = pages
-        this.isRead = isRead
-    }
+    constructor(title, author, pages, read) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages; 
+        this.read = read;
+    } 
 }
 
-class Shelf {
-    constructor() {
-        this.books = []
-    }
-
-    addBook(newBook) {
-        if (!this.isOnShelf(newBook)) {
-            this.books.push(newBook)
-        }
-    }
-
-    removeBook(title) {
-        this.books = this.books.filter((book) => book.title !== title)
-    }
-
-    getBook(title) {
-        return this.books.find((book) => book.title === title)
-    }
-
-    isOnShelf(newBook) {
-        return this.books.some((book) => book.title === newBook.title)
-    }
+const getLibSize = () => {
+    return library.length();
 }
 
 const book = new Book();
-const shelf = new Shelf();
 
-const loginBtn = document.getElementById('logInBtn');
-const addBookBtn = document.getElementById('newBook');
-const bookShelf = document.querySelector('.books-grid');
-const bookModal = document.getElementById('book-modal');
-const bookForm = document.getElementById('addBookForm');
-const overlay = document.getElementById('overlay');
-
-
-//Making Book modal show
-
-const openNewBookModal = () => {
-    bookForm.reset()
-    bookModal.classList.add('show'); 
-    overlay.classList.add('active');
-}
-
-const closeNewBookModal = () => {
-    bookModal.classList.remove('show');
-    overlay.classList.remove('active');
-}
-
-const addBookToShelf = () => {
-    // clearBookShelf()
-    for (let book of shelf.books) {
-        addBookCard(book);
+const addBook = (event) => {
+    event.preventDefault();
+    const newBook = getBookInfo();
+    if (library.includes([book.title])) {
+        console.log(book);
+        return;
+    } else {
+        console.log(library);
+        library.push(newBook);
+        // setLocal();
+        updateShelf();
+        bookForm.reset();
     }
-}
-
-/*const clearBookShelf = () => {
-    bookShelf.removeChild;
-}*/
-
-const addBookCard = (book) => {
-    //Creates book card elements
-    const bookCard = document.createElement('div')
-    const title = document.createElement('p')
-    const author = document.createElement('p')
-    const pages = document.createElement('p')
-    const cardBtns = document.createElement('div')
-    const readBtn = document.createElement('button')
-    const removeBtn = document.createElement('button')
-    //Assigns classes to new elements
-    bookCard.classList.add('book-card');
-    cardBtns.classList.add('card-btns');
-    readBtn.classList.add('card-button');
-    removeBtn.classList.add('card-button');
-    readBtn.onclick = toggleRead;
-    removeBtn.onclick = removeBook;
-    //Adds content for card elements
-    title.textContent = `Title: ${book.title}`;
-    author.textContent = book.author;
-    pages.textContent = `${book.pages} pages`;
-    removeBtn.textContent = 'Remove book';
-  
-
-    bookCard.appendChild(title)
-    bookCard.appendChild(author)
-    bookCard.appendChild(pages)
-    cardBtns.appendChild(readBtn)
-    cardBtns.appendChild(removeBtn)
-    bookCard.appendChild(cardBtns)
-    bookShelf.appendChild(bookCard)
+    closeBookModal();
 }
 
 const getBookInfo = () => {
-    const title = document.getElementById('title').value
-    const author = document.getElementById('author').value
-    const pages = document.getElementById('pages').value
-    const isRead = document.getElementById('is-read').checked
-    return new Book(title, author, pages, isRead);
+    title = document.getElementById('title').value;
+    author = document.getElementById('author').value;
+    pages = document.getElementById('pages').value;
+    read = document.getElementById('is-read').checked;
+    return new Book(title, author, pages, read);
 }
 
-const addBook = (e) => {
-    e.preventDefault()
-    const newBook = getBookInfo()
+const updateShelf = () => {
+    const bookShelf = document.querySelector('.books-grid');
+    bookShelf.querySelectorAll('div').forEach(n => n.remove());
 
-    if (shelf.isOnShelf(newBook)) {
-        alert('book already exists')
-        return;
-    } else { 
-        shelf.addBook(newBook) 
-        addBookToShelf()
+    for (let i = 0; i < library.length; i++) {
+        createBook(library[i]);
     }
-    closeNewBookModal()
 }
 
-const toggleRead = () => {
-     //Toggles books read status
-     if (book.isRead) {
-        readBtn.textContent = 'Read'
-        readBtn.classList.add('book-read')
-    } else {
-        readBtn.textContent = 'Not read'
+const createBook = (book) => {
+    const bookCard = document.createElement('div');
+    const readBtn = document.createElement('button');
+    const rmBtn = document.createElement('button');
+    const bTitle = document.createElement('h3');
+    const bAuthor = document.createElement('p');
+    const bPages = document.createElement('p');
+    const bRead = document.createElement('p'); 
+
+    rmBtn.className = 'outline';
+    bookCard.className = 'book-card';
+    bookCard.setAttribute( 'id', library.indexOf(book));
+    bookShelf.appendChild(bookCard);
+
+    bTitle.innerText = book.title;
+    bAuthor.innerText = `Author: ${book.author}`;
+    bPages.innerText = `Total Pages: ${book.pages}`;
+    bRead.innerText = `Read: ${book.read}`;
+    rmBtn.textContent = 'Remove';
+    rmBtn.setAttribute('id', 'removeBtn');
+    rmBtn.classList.add('red');
+
+    bookCard.appendChild(bTitle);
+    bookCard.appendChild(bAuthor);
+    bookCard.appendChild(bPages);
+    bookCard.appendChild(rmBtn);
+
+    readBtn.className = 'readBtn';
+    bookCard.appendChild(readBtn);
+    if (book.read === false) {
+        readBtn.textContent = 'Not Read';
         readBtn.classList.add('not-read')
+    } else {
+        readBtn.textContent = 'Book Read';
+        readBtn.classList.add('book-read');
     }
+
+    rmBtn.addEventListener('click', () => {
+        library.splice(library.indexOf(book), 1);
+        // noBooksAdded();
+        // setLocal();
+        updateShelf();
+    });
+
+    readBtn.addEventListener('click', () => {
+        book.read = !book.read;
+        // setLocal();
+        updateShelf();
+    });
+};
+
+const openBookModal = () => {
+    modal.classList.add('show');
+    overlay.classList.add('active');
 }
 
-const removeBook = () => {
-    
+const closeBookModal = () => {
+    modal.classList.remove('show');
+    overlay.classList.remove('active');
 }
-bookForm.addEventListener('submit', addBook);
-addBookBtn.addEventListener('click', openNewBookModal);
-overlay.addEventListener('click', closeNewBookModal);
+
+newBookBtn.addEventListener('click', openBookModal)
+overlay.addEventListener('click', closeBookModal);
+submitBtn.addEventListener('click', addBook);
+
+//form value reset
+const formReset = () => {
+    bookForm.title = '';
+    bookForm.author = '';
+    bookForm.pages = '';
+    bookForm.read = false;
+};

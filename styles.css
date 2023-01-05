@@ -14,11 +14,14 @@
     --spacing-xl: 35px;
     --button-green: rgba(86, 240, 88, 0.5);
     --button-red: rgba(248, 7, 59, 0.5);
+    --clr-red: hsl(5, 90%, 64%);
 }
 
 body {
-    height: 100vh;
+    min-height: 100vh;
     width: 100vw;
+    display: flex;
+    flex-direction: column;
 }
 
 /*header*/
@@ -40,14 +43,6 @@ body {
     font-size: larger;
 }
 
-.card-button {
-    padding: 12px 24px;
-    border: none;
-    border-radius: 5px;
-    font-weight: bold;
-    font-size: medium;
-}
-
 .btn:hover{
     cursor: pointer;
     background-color: #c7d1d6;
@@ -61,40 +56,73 @@ body {
 
 /*main content area*/
 
+h3 {
+    text-align: center;
+}
+
 .main-container {
     display: flex;
+    flex-direction: column;
     padding: var(--main-padding);
     justify-content: center;
 }
 
 .add-book {
-    padding: 14px 35px;
+    justify-content: center;
+    align-items: center;
+    /* padding: 14px 35px; */
     background-color: #ffff;
 }
 
 
-.book-grid{
+.books-grid{
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px,1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: var(--spacing-xl);
-    margin: var(--spacing-xl);
+    margin-top: var(--spacing-xl);
 }
 
 .book-card {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: center;
     font-size: 1.2rem;
     border-radius: 5px;
     background-color: var(--main-color);
     box-shadow: var(--shadow);
-    height: 300px;
+    height: 250px;
     width: 300px;
+    padding: var(--main-padding);
 }
 
 .card-btns {
     display: inline-flex;
     justify-content: space-around;
+    align-items: center;
+    gap: 10px;
+
+}
+
+#removeBtn.outline {
+    border: 3px solid;
+    border-color:  var(--clr-red);
+}
+#removeBtn.outline.red:hover{
+    background-color: var(--clr-red);
+}
+#removeBtn, .readBtn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: small;
+}
+
+#removeBtn:hover, .readBtn:hover {
+    cursor: pointer;
+    background-color: #c7d1d6;
+    transition: ease-in 150ms;
 }
 
 .book-read {
@@ -167,7 +195,7 @@ label {
 /*footer*/
 
 .footer {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 0;
     display: flex;

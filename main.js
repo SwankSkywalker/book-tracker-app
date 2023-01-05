@@ -11,7 +11,7 @@ class Book {
     constructor(title, author, pages, read) {
         this.title = title;
         this.author = author;
-        this.pages = pages;
+        this.pages = pages; 
         this.read = read;
     } 
 }
@@ -22,11 +22,11 @@ const getLibSize = () => {
 
 const book = new Book();
 
-const addBook = (e) => {
-    e.preventDefault();
+const addBook = (event) => {
+    event.preventDefault();
     const newBook = getBookInfo();
-    if (library.includes(Book.title)) {
-        console.log(Book);
+    if (library.includes([book.title])) {
+        console.log(book);
         return;
     } else {
         console.log(library);
